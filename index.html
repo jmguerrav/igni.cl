@@ -292,6 +292,25 @@ h2 .soft{color:var(--faint)}
 .panel .svc-group>.sub{margin-bottom:20px;font-size:14.5px}
 .panel .svc-group+.svc-group{margin-top:26px}
 .panel .closing,.panel .quote{margin-top:26px}
+
+/* ---------- barra superior agrupada ---------- */
+.nav-links{display:flex;align-items:center;gap:4px}
+.nv{display:inline-flex;align-items:center;gap:7px;border:none;background:none;font:inherit;
+  font-size:14.5px;font-weight:500;color:var(--ink);padding:9px 13px;cursor:pointer;white-space:nowrap;
+  border-radius:0;transition:background .16s var(--ease)}
+.nav-links a.nv,.nav-links .nv{color:var(--ink)}
+.nv:hover{background:rgba(13,13,13,.06)}
+.nv i{font-style:normal;font-size:11.5px;font-weight:700;color:var(--acc);letter-spacing:.04em}
+.chev{width:11px;height:8px;flex:none;opacity:.55;transition:transform .2s var(--ease)}
+.nv-drop{position:relative}
+.nv-drop:hover .chev,.nv-drop:focus-within .chev{transform:rotate(180deg)}
+.nv-menu{position:absolute;top:calc(100% + 8px);left:0;min-width:216px;background:var(--bg);
+  border:1px solid var(--line);padding:6px;display:none;flex-direction:column;
+  box-shadow:0 16px 34px rgba(13,13,13,.13);z-index:120}
+.nv-drop:hover .nv-menu,.nv-drop:focus-within .nv-menu,.nv-menu.open{display:flex}
+.nv-menu a{font-size:14px;color:var(--soft);padding:9px 12px;transition:background .14s var(--ease),color .14s var(--ease)}
+.nv-menu a:hover{background:var(--alt);color:var(--ink)}
+@media (max-width:1080px){.nv{padding:9px 9px;font-size:14px}.nv i{display:none}}
 </style>
 </head>
 <body>
@@ -352,11 +371,20 @@ h2 .soft{color:var(--faint)}
 </svg>
 </a>
     <nav class="nav-links">
-      <a href="#servicios" data-i18n="nav.services">Servicios</a>
-      <a href="#entregables" data-i18n="nav.deliverables">Entregables</a>
-      <a href="#trayectoria" data-i18n="nav.track">Capacidades</a>
-      <a href="#contacto" data-i18n="nav.contact">Contacto</a>
-    </nav>
+        <div class="nv-drop">
+          <button class="nv" aria-expanded="false"><i>01</i><span data-i18n="nav.g1">Nosotros</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></button>
+          <div class="nv-menu"><a href="#quienes" data-i18n="nav.g1a">Quiénes somos</a><a href="#trayectoria" data-i18n="nav.g1b">La experiencia</a><a href="#respaldo" data-i18n="nav.g1c">Respaldo técnico</a></div>
+        </div>
+        <div class="nv-drop">
+          <button class="nv" aria-expanded="false"><i>02</i><span data-i18n="nav.g2">Áreas</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></button>
+          <div class="nv-menu"><a href="#dominios" data-i18n="nav.g2a">Agua y gas</a><a href="#servicios" data-i18n="nav.g2b">Servicios</a></div>
+        </div>
+        <a class="nv" href="#entregables"><i>03</i><span data-i18n="nav.g3">Entregables</span></a>
+        <div class="nv-drop">
+          <button class="nv" aria-expanded="false"><i>04</i><span data-i18n="nav.g4">Cómo trabajamos</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></button>
+          <div class="nv-menu"><a href="#problema" data-i18n="nav.g4a">El problema</a><a href="#formatos" data-i18n="nav.g4b">Formatos de trabajo</a><a href="#siguiente" data-i18n="nav.g4c">El siguiente paso</a></div>
+        </div>
+      </nav>
     <div class="nav-right">
       <button class="theme" id="themeToggle" type="button" aria-label="Modo oscuro / claro"><svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round"/></svg><svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4" fill="none" stroke="currentColor" stroke-width="1.7"/><g stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 2.5v2.5M12 19v2.5M2.5 12H5M19 12h2.5M5.3 5.3l1.8 1.8M16.9 16.9l1.8 1.8M5.3 18.7l1.8-1.8M16.9 7.1l1.8-1.8"/></g></svg></button>
       <div class="lang">
@@ -531,7 +559,7 @@ h2 .soft{color:var(--faint)}
 <!-- FORMATOS -->
 <section class="section alt" id="formatos">
   <div class="wrap">
-    <p class="eyebrow reveal" data-i18n="fmt.eyebrow">07 · Cómo trabajamos</p>
+    <p class="eyebrow reveal" data-i18n="fmt.eyebrow">06 · Cómo trabajamos</p>
     <h2 class="reveal" data-i18n="fmt.h2">Tres formatos de trabajo</h2>
     <div class="cards3">
       <div class="card fmt reveal"><div class="pips"><i></i></div><h3 data-i18n="fmt.1.h">Por proyecto</h3><p data-i18n="fmt.1.b">Alcance y precio cerrados. Usted sabe qué recibe y cuándo, antes de empezar.</p></div>
@@ -545,7 +573,7 @@ h2 .soft{color:var(--faint)}
 <!-- CAPACIDADES -->
 <section class="section" id="trayectoria">
   <div class="wrap">
-    <p class="eyebrow reveal" data-i18n="tr.eyebrow">08 · La experiencia detrás de Igni</p>
+    <p class="eyebrow reveal" data-i18n="tr.eyebrow">07 · La experiencia detrás de Igni</p>
     <h2 class="reveal" data-i18n="tr.h2">Ingeniería ejercida, no solo asesorada</h2>
     <div class="timeline reveal">
       <div class="cards2" style="margin-top:0">
@@ -578,7 +606,7 @@ h2 .soft{color:var(--faint)}
 <!-- RESPALDO -->
 <section class="section tint" id="respaldo">
   <div class="wrap">
-    <p class="eyebrow reveal" data-i18n="bk.eyebrow">09 · Respaldo técnico</p>
+    <p class="eyebrow reveal" data-i18n="bk.eyebrow">08 · Respaldo técnico</p>
     <h2 class="reveal" data-i18n="bk.h2">Formación de fábrica y normas aplicadas</h2>
     <div class="cards2">
       <div class="card reveal"><div class="badge"><svg class="pi" aria-hidden="true"><use href="#i-wave"/></svg></div><h3 data-i18n="bk.1.h">Simulación y seguridad de procesos</h3><p data-i18n="bk.1.b">Modelado dinámico, compresores multietapa y estudios de seguridad en Aspen HYSYS — formación del AspenTech Training Center.</p></div>
@@ -593,7 +621,7 @@ h2 .soft{color:var(--faint)}
 <!-- SIGUIENTE PASO -->
 <section class="section" id="siguiente">
   <div class="wrap">
-    <p class="eyebrow reveal" data-i18n="nx.eyebrow">10 · El siguiente paso</p>
+    <p class="eyebrow reveal" data-i18n="nx.eyebrow">09 · El siguiente paso</p>
     <h2 class="reveal" data-i18n="nx.h2">Empecemos por un caso concreto</h2>
     <div class="steps">
       <div class="step reveal"><span class="num fill">1</span><h3 data-i18n="nx.1.h">Agendamos 30 minutos</h3><p data-i18n="nx.1.b">Por Teams o Meet, en el horario que le acomode.</p></div>
@@ -716,8 +744,8 @@ h2 .soft{color:var(--faint)}
   "use strict";
   var I18N = {
     es: null, /* ES is the document's native copy — captured from the DOM on load */
-    en: {"tab.agua":"Water","tab.gas":"Gas · LPG and LNG","tab.entregables":"Deliverables","tab.estandar":"How we deliver","fm.sending":"Sending…","fm.sent":"Message sent. We'll reply shortly.","fm.fields":"Please check name, company and email.","fm.captcha":"We couldn't verify you're not a robot. Please try again.","fm.limit":"Too many submissions. Please wait a couple of minutes.","fm.error":"Could not send. Write to contacto@igni.cl.","page.title":"Igni | Engineering & Development",
-      "nav.services":"Services","nav.deliverables":"Deliverables","nav.track":"Capabilities","nav.contact":"Contact","nav.cta":"Let's talk",
+    en: {"nav.g1":"About","nav.g1a":"Who we are","nav.g1b":"Track record","nav.g1c":"Technical backing","nav.g2":"Areas","nav.g2a":"Water and gas","nav.g2b":"Services","nav.g3":"Deliverables","nav.g4":"How we work","nav.g4a":"The problem","nav.g4b":"Ways of working","nav.g4c":"The next step","tab.agua":"Water","tab.gas":"Gas · LPG and LNG","tab.entregables":"Deliverables","tab.estandar":"How we deliver","fm.sending":"Sending…","fm.sent":"Message sent. We'll reply shortly.","fm.fields":"Please check name, company and email.","fm.captcha":"We couldn't verify you're not a robot. Please try again.","fm.limit":"Too many submissions. Please wait a couple of minutes.","fm.error":"Could not send. Write to contacto@igni.cl.","page.title":"Igni | Engineering & Development",
+      "nav.cta":"Let's talk",
       
       "hero.h1a":"Process engineering","hero.h1b":"for water and gas.",
       "hero.sub":"Senior engineering capacity for water and gas companies: design, review, energy efficiency and process safety — by project.",
@@ -766,22 +794,22 @@ h2 .soft{color:var(--faint)}
       "std.3.h":"Explicit criteria","std.3.b":"Assumptions are written down and discussed at the start, not guessed at once the plant has already been bought.",
       "std.4.h":"In your team's format","std.4.b":"Word, Excel, CAD or whatever you use internally — the deliverable arrives ready to work on, not to rewrite.",
       "std.quote":"A number that can't be traced to its source isn't a result: it's an opinion with decimals.",
-      "fmt.eyebrow":"07 · How we work","fmt.h2":"Three ways of working",
+      "fmt.eyebrow":"06 · How we work","fmt.h2":"Three ways of working",
       "fmt.1.h":"By project","fmt.1.b":"Closed scope and price. You know what you get and when, before starting.",
       "fmt.2.h":"Bank of hours","fmt.2.b":"Senior capacity reserved per month, for proposal peaks and reviews that can't wait.",
       "fmt.3.h":"Embedded support","fmt.3.b":"Continuous presence in the team's engineering, with availability agreed per week.",
       "fmt.close":"We start wherever demands the least risk of you: a bounded project, with closed scope and price.",
-      "tr.eyebrow":"08 · The experience behind Igni","tr.h2":"Engineering practised, not just advised",
+      "tr.eyebrow":"07 · The experience behind Igni","tr.h2":"Engineering practised, not just advised",
       "tr.1.h":"LNG terminal","tr.1.a":"Six years at Chile's first LNG receiving, storage and regasification terminal.","tr.1.b":"Head of the Process Engineering area and of the gas quality laboratory.","tr.1.c":"Energy efficiency: studies, conceptual engineering and ISO 50001 certification.","tr.1.d":"National consumption forecasts for the Ministry of Energy and LNG carrier discharge reports.",
       "tr.2.h":"Water treatment in Europe","tr.2.a":"Industrial water treatment project engineering in Europe.","tr.2.b":"Reverse osmosis, ultrafiltration, softening, demineralisation, chemical dosing and UV disinfection.","tr.2.c":"Design, specification, commissioning support and optimisation of systems in service.","tr.2.d":"Industrial clients in the pharmaceutical, food and manufacturing sectors.",
       "tr.sect.k":"Sectors served","tr.sect.v":"LNG terminals · LPG distribution · Industrial water · Pharmaceutical · Food & beverage",
-      "bk.eyebrow":"09 · Technical backing","bk.h2":"Factory training and standards applied",
+      "bk.eyebrow":"08 · Technical backing","bk.h2":"Factory training and standards applied",
       "bk.1.h":"Process simulation and safety","bk.1.b":"Dynamic modelling, multistage compressors and safety studies in Aspen HYSYS — AspenTech Training Center.",
       "bk.2.h":"Gas metrology, from the factory","bk.2.b":"Ultrasonic metering trained at Emerson (Mexico City) and process chromatography at Siemens (Karlsruhe, Germany).",
       "bk.3.h":"Certified energy auditing","bk.3.b":"IRCA-certified ISO 50001 Lead Auditor — TUV Rheinland Akademie. Four certified management systems: ISO 9001, 14001, 18001 and 50001.",
       "bk.4.h":"Standards applied in operation","bk.4.b":"ISO 6974 / 6976, NBS TN 1030 and NCh 2380 applied in the laboratory and in fiscal metering — not just cited. Member of the technical committee of the Natural Gas Association.",
       "bk.quote":"The difference between citing a standard and having operated it is the difference between a report and a judgement.",
-      "nx.eyebrow":"10 · The next step","nx.h2":"Let's start with a concrete case",
+      "nx.eyebrow":"09 · The next step","nx.h2":"Let's start with a concrete case",
       "nx.1.h":"We book 30 minutes","nx.1.b":"Over Teams or Meet, at a time that suits you.",
       "nx.2.h":"You bring a real case","nx.2.b":"A plant that isn't meeting spec, a stalled study, a proposal you can't get to.",
       "nx.3.h":"You receive a technical note","nx.3.b":"One page on how we'd approach it, what it would take and in what timeframe. No cost.",
@@ -942,6 +970,22 @@ h2 .soft{color:var(--faint)}
       });
       host.querySelectorAll(".panel.on .reveal").forEach(function(r){ r.classList.add("in"); });
     });
+  });
+
+  /* menús de la barra: teclado y toque */
+  document.querySelectorAll(".nv-drop").forEach(function(dd){
+    var btn = dd.querySelector(".nv"), menu = dd.querySelector(".nv-menu");
+    btn.addEventListener("click", function(ev){
+      ev.preventDefault(); ev.stopPropagation();
+      var abierto = menu.classList.toggle("open");
+      btn.setAttribute("aria-expanded", String(abierto));
+      document.querySelectorAll(".nv-menu").forEach(function(o){ if (o !== menu) o.classList.remove("open"); });
+    });
+    menu.addEventListener("click", function(){ menu.classList.remove("open"); btn.setAttribute("aria-expanded","false"); });
+  });
+  document.addEventListener("click", function(){
+    document.querySelectorAll(".nv-menu.open").forEach(function(o){ o.classList.remove("open"); });
+    document.querySelectorAll(".nv[aria-expanded]").forEach(function(b){ b.setAttribute("aria-expanded","false"); });
   });
   setLang(start);
   secStart();
