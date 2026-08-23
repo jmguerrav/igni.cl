@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline'; connect-src 'self'" />
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; script-src 'self' 'unsafe-inline' https://challenges.cloudflare.com; frame-src https://challenges.cloudflare.com; connect-src 'self' https://igni-form.*.workers.dev" />
 <meta name="referrer" content="strict-origin-when-cross-origin" />
 <title>Igni | Ingeniería &amp; Desarrollo</title>
 <meta name="description" content="Igni es una consultora de ingeniería de procesos especializada en agua y gas (GLP/GNL): diseño, revisión, eficiencia y seguridad de procesos, por proyecto." />
@@ -264,6 +264,16 @@ h2 .soft{color:var(--faint)}
 .del.t .del-i{opacity:.85}
 .del h3{padding-right:26px}
 .del::after,.card.del::after{display:none}
+
+/* formulario: trampa oculta, captcha y estado */
+.hp{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
+.cf-captcha:empty{display:none}
+.cf-captcha{margin:4px 0 14px}
+.cf-status{min-height:0;margin-top:10px;font-size:13px}
+.cf-status:empty{display:none}
+.cf-status.ok{color:var(--acc);font-weight:600}
+.cf-status.bad{color:#b3261e;font-weight:600}
+.btn.busy{opacity:.6;pointer-events:none}
 </style>
 </head>
 <body>
@@ -604,6 +614,9 @@ h2 .soft{color:var(--faint)}
           </select>
         </label>
         <label class="field"><span data-i18n="ct.form.msg">El caso</span><textarea id="cfMsg" rows="4" maxlength="300"></textarea><i class="ccount"><b id="cfCount">0</b>/300</i></label>
+        <input type="text" id="cfWebsite" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
+        <div id="cfCaptcha" class="cf-captcha"></div>
+        <p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
         <a class="btn" id="cfSubmit" href="mailto:contacto@igni.cl" target="_blank" rel="noopener" data-i18n="ct.form.submit">Enviar →</a>
         <p class="hint" data-i18n="ct.form.hint">Se abre en su aplicación de correo con el mensaje ya redactado.</p>
       </div>
@@ -674,7 +687,7 @@ h2 .soft{color:var(--faint)}
   "use strict";
   var I18N = {
     es: null, /* ES is the document's native copy — captured from the DOM on load */
-    en: {"page.title":"Igni | Engineering & Development",
+    en: {"fm.sending":"Sending…","fm.sent":"Message sent. We'll reply shortly.","fm.fields":"Please check name, company and email.","fm.captcha":"We couldn't verify you're not a robot. Please try again.","fm.limit":"Too many submissions. Please wait a couple of minutes.","fm.error":"Could not send. Write to contacto@igni.cl.","page.title":"Igni | Engineering & Development",
       "nav.services":"Services","nav.deliverables":"Deliverables","nav.how":"Standard","nav.track":"Capabilities","nav.contact":"Contact","nav.cta":"Let's talk",
       
       "hero.h1a":"Process engineering","hero.h1b":"for water and gas.",
@@ -758,6 +771,7 @@ h2 .soft{color:var(--faint)}
   var nodes = document.querySelectorAll("[data-i18n]");
   for (var i = 0; i < nodes.length; i++) I18N.es[nodes[i].getAttribute("data-i18n")] = nodes[i].innerHTML;
   I18N.es["page.title"] = "Igni | Ingeniería & Desarrollo";
+  I18N.es["fm.sending"] = "Enviando…"; I18N.es["fm.sent"] = "Mensaje enviado. Le respondemos en breve."; I18N.es["fm.fields"] = "Revise nombre, empresa y correo."; I18N.es["fm.captcha"] = "No pudimos verificar que no es un robot. Inténtelo de nuevo."; I18N.es["fm.limit"] = "Demasiados envíos seguidos. Espere un par de minutos."; I18N.es["fm.error"] = "No se pudo enviar. Escríbanos a contacto@igni.cl."; 
 
   function setLang(lang){
     var dict = I18N[lang] || I18N.es;
@@ -836,6 +850,57 @@ h2 .soft{color:var(--faint)}
     secI++;
   }
   function secStart(){ if (secTimer) clearInterval(secTimer); secI = 0; secEl.textContent = secList()[0]; secEl.classList.add("on"); secI = 1; secTimer = setInterval(secShow, 2600); }
+
+  /* ---- envío del formulario ----
+     Mientras FORM_ENDPOINT o TURNSTILE_SITEKEY estén vacíos, el botón sigue
+     abriendo el correo del visitante (comportamiento actual, sin riesgo).
+     Al rellenarlos, pasa a enviar por el Worker con captcha. */
+  var FORM_ENDPOINT = "";
+  var TURNSTILE_SITEKEY = "";
+  var cfWebsite = document.getElementById("cfWebsite"),
+      cfStatus  = document.getElementById("cfStatus"),
+      cfCaptcha = document.getElementById("cfCaptcha");
+  function t(k){ var d = I18N[document.documentElement.lang] || I18N.es; return d[k] || k; }
+  function say(k, cls){ if(!cfStatus) return; cfStatus.textContent = k ? t(k) : ""; cfStatus.className = "cf-status" + (cls ? " " + cls : ""); }
+
+  if (FORM_ENDPOINT && TURNSTILE_SITEKEY) {
+    var tsWidget = null;
+    window.igniTurnstileReady = function(){
+      tsWidget = window.turnstile.render(cfCaptcha, { sitekey: TURNSTILE_SITEKEY, theme: "auto" });
+    };
+    var ts = document.createElement("script");
+    ts.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=igniTurnstileReady&render=explicit";
+    ts.async = true; ts.defer = true;
+    document.head.appendChild(ts);
+
+    cfSubmit.addEventListener("click", function(ev){
+      ev.preventDefault();
+      if (!cfName.value.trim() || !cfCompany.value.trim() || !cfEmail.value.trim()) { say("fm.fields","bad"); return; }
+      var token = "";
+      try { token = window.turnstile.getResponse(tsWidget) || ""; } catch (_) {}
+      if (!token) { say("fm.captcha","bad"); return; }
+      cfSubmit.classList.add("busy"); say("fm.sending");
+      fetch(FORM_ENDPOINT, {
+        method: "POST", headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name: cfName.value, company: cfCompany.value, email: cfEmail.value,
+          topic: cfTopic.options[cfTopic.selectedIndex].textContent,
+          msg: cfMsg.value, website: cfWebsite ? cfWebsite.value : "",
+          lang: document.documentElement.lang, token: token
+        })
+      }).then(function(r){ return r.json().catch(function(){ return { ok:false }; }); })
+        .then(function(d){
+          cfSubmit.classList.remove("busy");
+          try { window.turnstile.reset(tsWidget); } catch (_) {}
+          if (d && d.ok) { say("fm.sent","ok"); [cfName,cfCompany,cfEmail,cfMsg].forEach(function(el){ el.value=""; }); updateMail(); }
+          else if (d && d.error === "captcha") say("fm.captcha","bad");
+          else if (d && d.error === "limite")  say("fm.limit","bad");
+          else if (d && d.error === "campos")  say("fm.fields","bad");
+          else say("fm.error","bad");
+        })
+        .catch(function(){ cfSubmit.classList.remove("busy"); say("fm.error","bad"); });
+    });
+  }
   setLang(start);
   secStart();
 
