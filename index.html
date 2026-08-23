@@ -275,23 +275,6 @@ h2 .soft{color:var(--faint)}
 .cf-status.bad{color:#b3261e;font-weight:600}
 .btn.busy{opacity:.6;pointer-events:none}
 
-/* ---------- pantallas completas ---------- */
-html{scroll-snap-type:y proximity}
-.hero,.section,.contact{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
-  scroll-snap-align:start;padding-top:calc(var(--navh) + 26px);padding-bottom:34px}
-.hero{padding-top:calc(var(--navh) + 40px)}
-.section+.section::before{display:none}
-.section .wrap,.contact .wrap{width:100%}
-@media (max-height:760px){
-  .section h2{margin-bottom:14px}
-  .cards2,.cards3,.cards4,.toolgrid{margin-top:22px}
-  .card{padding:18px 18px}
-  .principles{margin-top:26px}
-}
-@media (max-width:760px){
-  .hero,.section,.contact{min-height:0;padding-top:64px;padding-bottom:56px;scroll-snap-align:none}
-  html{scroll-snap-type:none}
-}
 
 /* ---------- pestañas ---------- */
 .tabs{display:inline-flex;gap:6px;margin:22px 0 4px;padding:5px;border:1px solid var(--line);
