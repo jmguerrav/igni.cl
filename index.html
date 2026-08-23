@@ -21,7 +21,7 @@
   --line:rgba(13,13,13,.10); --alt:rgba(13,13,13,.025);
   --acc:#2f6fd6; --acc-hover:#2459b3; --tint:rgba(47,111,214,.07); --tintln:rgba(47,111,214,.28); --onblue:rgba(255,255,255,.82);
   --sans:"Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
-  --navbg:rgba(255,255,255,.88); --hover:rgba(13,13,13,.08); --shadow:rgba(13,13,13,.14); --maxw:1024px; --navh:58px; --ease:cubic-bezier(.28,.11,.32,1);
+  --navbg:rgba(255,255,255,.88); --hover:rgba(13,13,13,.08); --shadow:rgba(13,13,13,.14); --maxw:1024px; --navh:72px; --ease:cubic-bezier(.28,.11,.32,1);
 }
 
 :root[data-theme="dark"]{--bg:#0f1115; --ink:#f2f3f5; --soft:rgba(242,243,245,.70); --faint:rgba(242,243,245,.48); --line:rgba(242,243,245,.12); --alt:rgba(242,243,245,.045); --acc:#3d7ae0; --acc-hover:#5a90e8; --tint:rgba(77,134,230,.14); --tintln:rgba(77,134,230,.38); --navbg:rgba(15,17,21,.86); --hover:rgba(242,243,245,.10); --shadow:rgba(0,0,0,.5);}
@@ -90,9 +90,9 @@ h2 .soft{color:var(--faint)}
 .hero .link-cta{color:#fff}
 .sectors{margin-top:44px;font-size:13px;color:var(--onblue)}.sectors b{color:#fff;letter-spacing:.1em;text-transform:uppercase;font-size:11px;margin-right:10px}
 
-.brand .mark{width:26px;height:auto;flex:none;color:var(--ink)}.brand .wm{height:15px;width:auto;color:var(--ink);shape-rendering:crispEdges}
+.brand .mark{width:26px;height:auto;flex:none;color:var(--ink)}.brand .wm{height:33px;width:auto;color:var(--ink);shape-rendering:crispEdges}
 .hero-mark{position:absolute;right:5%;top:50%;transform:translateY(-50%);width:min(34vw,340px);height:auto;color:#fff;opacity:.92;pointer-events:none}
-.foot-brand{display:inline-flex;align-items:center;gap:9px;color:#fff}.foot-brand .mark{width:22px;height:auto}.foot-brand .wm{height:13px;width:auto;shape-rendering:crispEdges}
+.foot-brand{display:inline-flex;align-items:center;gap:9px;color:#fff}.foot-brand .mark{width:22px;height:auto}.foot-brand .wm{height:21px;width:auto;shape-rendering:crispEdges}
 .theme{display:inline-flex;align-items:center;justify-content:center;width:34px;height:34px;border-radius:999px;border:none;background:transparent;color:var(--soft);cursor:pointer;transition:background .2s var(--ease),color .2s var(--ease)}
 .theme:hover{color:var(--ink);background:var(--hover)}.theme svg{width:17px;height:17px}
 .theme .sun{display:none}.theme .moon{display:block}
@@ -294,7 +294,7 @@ h2 .soft{color:var(--faint)}
 .panel .closing,.panel .quote{margin-top:26px}
 
 /* ---------- barra superior agrupada ---------- */
-.nav-links{display:flex;align-items:center;gap:4px}
+.nav-links{display:flex;align-items:center;gap:2px;margin-left:auto;margin-right:10px}
 .nv{display:inline-flex;align-items:center;gap:7px;border:none;background:none;font:inherit;
   font-size:14.5px;font-weight:500;color:var(--ink);padding:9px 13px;cursor:pointer;white-space:nowrap;
   border-radius:0;transition:background .16s var(--ease)}
@@ -311,6 +311,20 @@ h2 .soft{color:var(--faint)}
 .nv-menu a{font-size:14px;color:var(--soft);padding:9px 12px;transition:background .14s var(--ease),color .14s var(--ease)}
 .nv-menu a:hover{background:var(--alt);color:var(--ink)}
 @media (max-width:1080px){.nv{padding:9px 9px;font-size:14px}.nv i{display:none}}
+@media (max-width:900px){.nav-links{display:none}}
+
+/* tercera vía: otros procesos */
+:root{--pro:#7B4DE0;--pro-soft:rgba(123,77,224,.09);--pro-line:rgba(123,77,224,.28)}
+.tab-pro{color:var(--pro)}
+.tab-pro:hover{color:var(--pro)}
+.tab-pro.on{background:var(--pro);color:#fff}
+.pro-block{margin-top:30px;max-width:760px;border:1px solid var(--pro-line);background:var(--pro-soft);padding:30px 30px 32px}
+.pro-block h3{font-size:22px;margin:16px 0 12px;color:var(--ink)}
+.pro-block p{font-size:15.5px;color:var(--soft);margin-bottom:14px}
+.badge-pro{background:var(--pro-soft);border-color:var(--pro-line)}
+.badge-pro .pi{color:var(--pro)}
+.btn-pro{background:var(--pro);margin-top:8px}
+.btn-pro:hover{background:#6a3ccc}
 </style>
 </head>
 <body>
@@ -372,16 +386,16 @@ h2 .soft{color:var(--faint)}
 </a>
     <nav class="nav-links">
         <div class="nv-drop">
-          <button class="nv" aria-expanded="false"><i>01</i><span data-i18n="nav.g1">Nosotros</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></button>
+          <button class="nv" aria-expanded="false"><span data-i18n="nav.g1">Nosotros</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></button>
           <div class="nv-menu"><a href="#quienes" data-i18n="nav.g1a">Quiénes somos</a><a href="#trayectoria" data-i18n="nav.g1b">La experiencia</a><a href="#respaldo" data-i18n="nav.g1c">Respaldo técnico</a></div>
         </div>
         <div class="nv-drop">
-          <button class="nv" aria-expanded="false"><i>02</i><span data-i18n="nav.g2">Áreas</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></button>
+          <button class="nv" aria-expanded="false"><span data-i18n="nav.g2">Áreas</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></button>
           <div class="nv-menu"><a href="#dominios" data-i18n="nav.g2a">Agua y gas</a><a href="#servicios" data-i18n="nav.g2b">Servicios</a></div>
         </div>
-        <a class="nv" href="#entregables"><i>03</i><span data-i18n="nav.g3">Entregables</span></a>
+        <a class="nv" href="#entregables"><span data-i18n="nav.g3">Entregables</span></a>
         <div class="nv-drop">
-          <button class="nv" aria-expanded="false"><i>04</i><span data-i18n="nav.g4">Cómo trabajamos</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></button>
+          <button class="nv" aria-expanded="false"><span data-i18n="nav.g4">Cómo trabajamos</span><svg class="chev" viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1.5 L6 6.5 L11 1.5" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></button>
           <div class="nv-menu"><a href="#problema" data-i18n="nav.g4a">El problema</a><a href="#formatos" data-i18n="nav.g4b">Formatos de trabajo</a><a href="#siguiente" data-i18n="nav.g4c">El siguiente paso</a></div>
         </div>
       </nav>
@@ -482,6 +496,7 @@ h2 .soft{color:var(--faint)}
         <div class="tabs" role="tablist">
       <button class="tab on" role="tab" data-tab="svc-agua" data-i18n="tab.agua">Agua</button>
       <button class="tab" role="tab" data-tab="svc-gas" data-i18n="tab.gas">Gas · GLP y GNL</button>
+      <button class="tab tab-pro" role="tab" data-tab="svc-procesos" data-i18n="tab.procesos">Procesos</button>
     </div>
     <div class="panel on" id="svc-agua">
 <div class="svc-group reveal">
@@ -513,7 +528,16 @@ h2 .soft{color:var(--faint)}
     </div>
 
     
-  </div>
+      <div class="panel" id="svc-procesos">
+      <div class="pro-block">
+        <div class="badge badge-pro"><svg class="pi" aria-hidden="true"><use href="#i-cube"/></svg></div>
+        <h3 data-i18n="svc.p.h">Otros procesos industriales</h3>
+        <p data-i18n="svc.p.b1">Nuestro equipo también tiene capacidad técnica para resolver proyectos fuera del agua y el gas, con la misma gama de servicios: balances y simulación, dimensionamiento, especificación de equipos, revisión independiente, seguridad de procesos y puesta en marcha.</p>
+        <p data-i18n="svc.p.b2">Póngase en contacto y evaluaremos juntos si podemos darle apoyo técnico en su área específica.</p>
+        <a href="#contacto" class="btn btn-pro" data-i18n="svc.p.cta">Cuéntenos su caso</a>
+      </div>
+    </div>
+</div>
 </section>
 
 <!-- ENTREGABLES -->
@@ -744,7 +768,7 @@ h2 .soft{color:var(--faint)}
   "use strict";
   var I18N = {
     es: null, /* ES is the document's native copy — captured from the DOM on load */
-    en: {"nav.g1":"About","nav.g1a":"Who we are","nav.g1b":"Track record","nav.g1c":"Technical backing","nav.g2":"Areas","nav.g2a":"Water and gas","nav.g2b":"Services","nav.g3":"Deliverables","nav.g4":"How we work","nav.g4a":"The problem","nav.g4b":"Ways of working","nav.g4c":"The next step","tab.agua":"Water","tab.gas":"Gas · LPG and LNG","tab.entregables":"Deliverables","tab.estandar":"How we deliver","fm.sending":"Sending…","fm.sent":"Message sent. We'll reply shortly.","fm.fields":"Please check name, company and email.","fm.captcha":"We couldn't verify you're not a robot. Please try again.","fm.limit":"Too many submissions. Please wait a couple of minutes.","fm.error":"Could not send. Write to contacto@igni.cl.","page.title":"Igni | Engineering & Development",
+    en: {"tab.procesos":"Other processes","svc.p.h":"Other industrial processes","svc.p.b1":"Our team also has the technical capacity to take on projects beyond water and gas, with the same range of services: balances and simulation, sizing, equipment specification, independent review, process safety and commissioning.","svc.p.b2":"Get in touch and we'll assess together whether we can give you technical support in your specific area.","svc.p.cta":"Tell us your case","nav.g1":"About","nav.g1a":"Who we are","nav.g1b":"Track record","nav.g1c":"Technical backing","nav.g2":"Areas","nav.g2a":"Water and gas","nav.g2b":"Services","nav.g3":"Deliverables","nav.g4":"How we work","nav.g4a":"The problem","nav.g4b":"Ways of working","nav.g4c":"The next step","tab.agua":"Water","tab.gas":"Gas · LPG and LNG","tab.entregables":"Deliverables","tab.estandar":"How we deliver","fm.sending":"Sending…","fm.sent":"Message sent. We'll reply shortly.","fm.fields":"Please check name, company and email.","fm.captcha":"We couldn't verify you're not a robot. Please try again.","fm.limit":"Too many submissions. Please wait a couple of minutes.","fm.error":"Could not send. Write to contacto@igni.cl.","page.title":"Igni | Engineering & Development",
       "nav.cta":"Let's talk",
       
       "hero.h1a":"Process engineering","hero.h1b":"for water and gas.",
