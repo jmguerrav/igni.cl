@@ -274,6 +274,41 @@ h2 .soft{color:var(--faint)}
 .cf-status.ok{color:var(--acc);font-weight:600}
 .cf-status.bad{color:#b3261e;font-weight:600}
 .btn.busy{opacity:.6;pointer-events:none}
+
+/* ---------- pantallas completas ---------- */
+html{scroll-snap-type:y proximity}
+.hero,.section,.contact{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  scroll-snap-align:start;padding-top:calc(var(--navh) + 26px);padding-bottom:34px}
+.hero{padding-top:calc(var(--navh) + 40px)}
+.section+.section::before{display:none}
+.section .wrap,.contact .wrap{width:100%}
+@media (max-height:760px){
+  .section h2{margin-bottom:14px}
+  .cards2,.cards3,.cards4,.toolgrid{margin-top:22px}
+  .card{padding:18px 18px}
+  .principles{margin-top:26px}
+}
+@media (max-width:760px){
+  .hero,.section,.contact{min-height:0;padding-top:64px;padding-bottom:56px;scroll-snap-align:none}
+  html{scroll-snap-type:none}
+}
+
+/* ---------- pestañas ---------- */
+.tabs{display:inline-flex;gap:6px;margin:22px 0 4px;padding:5px;border:1px solid var(--line);
+  border-radius:0;background:var(--bg)}
+.section.alt .tabs{background:var(--bg)}
+.tab{border:none;background:none;font:inherit;font-size:14px;font-weight:600;color:var(--soft);
+  padding:9px 18px;cursor:pointer;border-radius:0;transition:background .18s var(--ease),color .18s var(--ease)}
+.tab:hover{color:var(--ink)}
+.tab.on{background:var(--acc);color:#fff}
+.panel{display:none}
+.panel.on{display:block;animation:tabin .32s var(--ease)}
+@keyframes tabin{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.panel .svc-group{margin-top:26px}
+.panel .svc-group>h3{display:none}
+.panel .svc-group>.sub{margin-bottom:20px;font-size:14.5px}
+.panel .svc-group+.svc-group{margin-top:26px}
+.panel .closing,.panel .quote{margin-top:26px}
 </style>
 </head>
 <body>
@@ -336,7 +371,6 @@ h2 .soft{color:var(--faint)}
     <nav class="nav-links">
       <a href="#servicios" data-i18n="nav.services">Servicios</a>
       <a href="#entregables" data-i18n="nav.deliverables">Entregables</a>
-      <a href="#estandar" data-i18n="nav.how">Estándar</a>
       <a href="#trayectoria" data-i18n="nav.track">Capacidades</a>
       <a href="#contacto" data-i18n="nav.contact">Contacto</a>
     </nav>
@@ -434,7 +468,12 @@ h2 .soft{color:var(--faint)}
   <div class="wrap">
     <p class="eyebrow reveal" data-i18n="svc.eyebrow">04 · Qué hacemos</p>
     <h2 class="reveal" data-i18n="svc.h2">Servicios</h2>
-    <div class="svc-group reveal">
+        <div class="tabs" role="tablist">
+      <button class="tab on" role="tab" data-tab="svc-agua" data-i18n="tab.agua">Agua</button>
+      <button class="tab" role="tab" data-tab="svc-gas" data-i18n="tab.gas">Gas · GLP y GNL</button>
+    </div>
+    <div class="panel on" id="svc-agua">
+<div class="svc-group reveal">
       <h3 data-i18n="svc.w.h">Agua</h3>
       <p class="sub" data-i18n="svc.w.s">Agua de proceso, potable industrial y farmacéutica — de las bases de diseño a la planta en servicio.</p>
       <div class="cards3">
@@ -446,7 +485,9 @@ h2 .soft{color:var(--faint)}
         <div class="card"><div class="badge"><svg class="pi" aria-hidden="true"><use href="#i-gauge"/></svg></div><h4 data-i18n="svc.w6.h">Puesta en marcha</h4><p data-i18n="svc.w6.b">Comisionamiento, ajuste operacional, protocolos de prueba y capacitación del equipo de terreno.</p></div>
       </div>
     </div>
-    <div class="svc-group reveal">
+    </div>
+    <div class="panel" id="svc-gas">
+<div class="svc-group reveal">
       <h3 data-i18n="svc.g.h">Gas — GLP y GNL</h3>
       <p class="sub" data-i18n="svc.g.s">Terminales, plantas satélite, envasado y carga — eficiencia, metrología y seguridad de procesos.</p>
       <div class="cards3">
@@ -458,6 +499,9 @@ h2 .soft{color:var(--faint)}
         <div class="card"><div class="badge"><svg class="pi" aria-hidden="true"><use href="#i-stamp"/></svg></div><h4 data-i18n="svc.g6.h">Soporte regulatorio</h4><p data-i18n="svc.g6.b">Informes técnicos de descarga, pronósticos de demanda y reportes a la autoridad — hechos para ser auditados.</p></div>
       </div>
     </div>
+    </div>
+
+    
   </div>
 </section>
 
@@ -466,7 +510,12 @@ h2 .soft{color:var(--faint)}
   <div class="wrap">
     <p class="eyebrow reveal" data-i18n="del.eyebrow">05 · Entregables</p>
     <h2 class="reveal" data-i18n="del.h2">Lo que queda en sus manos</h2>
-    <div class="cards4 reveal">
+    <div class="tabs" role="tablist">
+      <button class="tab on" role="tab" data-tab="del-lista" data-i18n="tab.entregables">Entregables</button>
+      <button class="tab" role="tab" data-tab="del-estandar" data-i18n="tab.estandar">Cómo entregamos</button>
+    </div>
+    <div class="panel on" id="del-lista">
+<div class="cards4 reveal">
       <div class="del t"><svg class="pi del-i" aria-hidden="true"><use href="#i-pid"/></svg><h3 data-i18n="del.1.h">P&amp;ID</h3><p data-i18n="del.1.b">Cañerías e instrumentación, simbología ISA.</p></div>
       <div class="del"><svg class="pi del-i" aria-hidden="true"><use href="#i-flow"/></svg><h3 data-i18n="del.2.h">PFD</h3><p data-i18n="del.2.b">Flujo de proceso con tabla de corrientes.</p></div>
       <div class="del t"><svg class="pi del-i" aria-hidden="true"><use href="#i-cube"/></svg><h3 data-i18n="del.3.h">Modelos 3D</h3><p data-i18n="del.3.b">Plantas, skids y salas, en DXF y STEP.</p></div>
@@ -480,24 +529,21 @@ h2 .soft{color:var(--faint)}
       <div class="del t"><svg class="pi del-i" aria-hidden="true"><use href="#i-alert"/></svg><h3 data-i18n="del.11.h">Planes de respuesta a emergencias</h3><p data-i18n="del.11.b">GLP, GNL y plantas de proceso.</p></div>
       <div class="del"><svg class="pi del-i" aria-hidden="true"><use href="#i-check"/></svg><h3 data-i18n="del.12.h">Protocolos de puesta en marcha</h3><p data-i18n="del.12.b">Pruebas, aceptación y capacitación.</p></div>
     </div>
-    <p class="closing reveal" data-i18n="del.close">Todo en formato editable y con su memoria de respaldo — CAD en DXF, cálculos en Excel, informes en Word.</p>
-  </div>
-</section>
-
-<!-- ESTÁNDAR -->
-<section class="section" id="estandar">
-  <div class="wrap">
-    <p class="eyebrow reveal" data-i18n="std.eyebrow">06 · Cómo entregamos</p>
-    <h2 class="reveal" data-i18n="std.h2">El estándar de entrega</h2>
-    <div class="cards2">
+      <p class="closing reveal" data-i18n="del.close">Todo en formato editable y con su memoria de respaldo — CAD en DXF, cálculos en Excel, informes en Word.</p>
+    </div>
+    <div class="panel" id="del-estandar">
+<div class="cards2">
       <div class="card reveal"><div class="badge"><svg class="pi" aria-hidden="true"><use href="#i-docchk"/></svg></div><h3 data-i18n="std.1.h">Memoria trazable</h3><p data-i18n="std.1.b">Cada número con su fuente, su fórmula y su suposición a la vista. No una planilla cerrada que hay que creer.</p></div>
       <div class="card reveal"><div class="badge"><svg class="pi" aria-hidden="true"><use href="#i-scale"/></svg></div><h3 data-i18n="std.2.h">Recálculo independiente</h3><p data-i18n="std.2.b">Todo resultado se vuelve a calcular por un segundo camino antes de salir. Si los dos no coinciden, no se entrega.</p></div>
       <div class="card reveal"><div class="badge"><svg class="pi" aria-hidden="true"><use href="#i-list"/></svg></div><h3 data-i18n="std.3.h">Criterio explícito</h3><p data-i18n="std.3.b">Las suposiciones se escriben y se discuten al principio, no se adivinan cuando la planta ya está comprada.</p></div>
       <div class="card reveal"><div class="badge"><svg class="pi" aria-hidden="true"><use href="#i-grid"/></svg></div><h3 data-i18n="std.4.h">En el formato de su equipo</h3><p data-i18n="std.4.b">Word, Excel, CAD o el que usen internamente — el entregable llega listo para trabajar sobre él, no para reescribirlo.</p></div>
     </div>
-    <p class="quote reveal" data-i18n="std.quote">Un número que no se puede rastrear hasta su fuente no es un resultado: es una opinión con decimales.</p>
+      <p class="quote reveal" data-i18n="std.quote">Un número que no se puede rastrear hasta su fuente no es un resultado: es una opinión con decimales.</p>
+    </div>
   </div>
 </section>
+
+<!-- ESTÁNDAR -->
 
 <!-- FORMATOS -->
 <section class="section alt" id="formatos">
@@ -687,8 +733,8 @@ h2 .soft{color:var(--faint)}
   "use strict";
   var I18N = {
     es: null, /* ES is the document's native copy — captured from the DOM on load */
-    en: {"fm.sending":"Sending…","fm.sent":"Message sent. We'll reply shortly.","fm.fields":"Please check name, company and email.","fm.captcha":"We couldn't verify you're not a robot. Please try again.","fm.limit":"Too many submissions. Please wait a couple of minutes.","fm.error":"Could not send. Write to contacto@igni.cl.","page.title":"Igni | Engineering & Development",
-      "nav.services":"Services","nav.deliverables":"Deliverables","nav.how":"Standard","nav.track":"Capabilities","nav.contact":"Contact","nav.cta":"Let's talk",
+    en: {"tab.agua":"Water","tab.gas":"Gas · LPG and LNG","tab.entregables":"Deliverables","tab.estandar":"How we deliver","fm.sending":"Sending…","fm.sent":"Message sent. We'll reply shortly.","fm.fields":"Please check name, company and email.","fm.captcha":"We couldn't verify you're not a robot. Please try again.","fm.limit":"Too many submissions. Please wait a couple of minutes.","fm.error":"Could not send. Write to contacto@igni.cl.","page.title":"Igni | Engineering & Development",
+      "nav.services":"Services","nav.deliverables":"Deliverables","nav.track":"Capabilities","nav.contact":"Contact","nav.cta":"Let's talk",
       
       "hero.h1a":"Process engineering","hero.h1b":"for water and gas.",
       "hero.sub":"Senior engineering capacity for water and gas companies: design, review, energy efficiency and process safety — by project.",
@@ -901,6 +947,19 @@ h2 .soft{color:var(--faint)}
         .catch(function(){ cfSubmit.classList.remove("busy"); say("fm.error","bad"); });
     });
   }
+
+  /* pestañas */
+  document.querySelectorAll(".tabs").forEach(function(bar){
+    bar.addEventListener("click", function(ev){
+      var b = ev.target.closest(".tab"); if (!b) return;
+      bar.querySelectorAll(".tab").forEach(function(x){ x.classList.toggle("on", x === b); });
+      var host = bar.parentNode;
+      host.querySelectorAll(".panel").forEach(function(pn){
+        pn.classList.toggle("on", pn.id === b.getAttribute("data-tab"));
+      });
+      host.querySelectorAll(".panel.on .reveal").forEach(function(r){ r.classList.add("in"); });
+    });
+  });
   setLang(start);
   secStart();
 
