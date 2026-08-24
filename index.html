@@ -463,6 +463,20 @@ h2 .soft{color:var(--faint)}
 .phone-row{display:flex;gap:8px}
 .phone-row select{width:118px;flex:none}
 .phone-row input{flex:1;min-width:0}
+
+/* formulario compacto y campos uniformes */
+.cform{padding:22px 22px}
+.cform h3{margin-bottom:14px}
+.field{margin-bottom:11px}
+.field span{margin-bottom:5px}
+.field input,.field select,.field textarea{height:40px;padding:0 11px;font-size:14.5px}
+.field textarea{height:auto;min-height:74px;padding:9px 11px}
+.cform .field:has(textarea){margin-bottom:20px}
+.phone-row select{width:96px;padding:0 6px}
+.frow{gap:0 11px}
+.cf-captcha{margin:2px 0 10px}
+.cform .btn{padding:11px 22px}
+.ccount{bottom:-14px}
 </style>
 </head>
 <body>
@@ -853,7 +867,7 @@ h2 .soft{color:var(--faint)}
           </div>
           <div class="frow">
             <label class="field"><span data-i18n="ct.form.email">Su correo</span><input type="email" id="cfEmail" placeholder="nombre@empresa.cl" autocomplete="email" maxlength="120" /></label>
-            <label class="field"><span data-i18n="ct.form.phone">Teléfono</span><span class="phone-row"><select id="cfCC" aria-label="Código de país"><option value="+56" selected>+56 CL</option><option value="+54">+54 AR</option><option value="+51">+51 PE</option><option value="+57">+57 CO</option><option value="+52">+52 MX</option><option value="+55">+55 BR</option><option value="+593">+593 EC</option><option value="+591">+591 BO</option><option value="+598">+598 UY</option><option value="+595">+595 PY</option><option value="+507">+507 PA</option><option value="+353">+353 IE</option><option value="+34">+34 ES</option><option value="+1">+1 US/CA</option><option value="+44">+44 UK</option><option value="+49">+49 DE</option></select><input type="tel" id="cfPhone" placeholder="9 1234 5678" autocomplete="tel" maxlength="20" /></span></label>
+            <label class="field"><span data-i18n="ct.form.phone">Teléfono</span><span class="phone-row"><select id="cfCC" aria-label="Código de país"><option value="+56" selected>🇨🇱 +56</option><option value="+54"None>🇦🇷 +54</option><option value="+51"None>🇵🇪 +51</option><option value="+57"None>🇨🇴 +57</option><option value="+52"None>🇲🇽 +52</option><option value="+55"None>🇧🇷 +55</option><option value="+593"None>🇪🇨 +593</option><option value="+591"None>🇧🇴 +591</option><option value="+598"None>🇺🇾 +598</option><option value="+595"None>🇵🇾 +595</option><option value="+507"None>🇵🇦 +507</option><option value="+353"None>🇮🇪 +353</option><option value="+34"None>🇪🇸 +34</option><option value="+1"None>🇺🇸 +1</option><option value="+44"None>🇬🇧 +44</option><option value="+49"None>🇩🇪 +49</option></select><input type="tel" id="cfPhone" placeholder="9 1234 5678" autocomplete="tel" maxlength="20" /></span></label>
           </div>
           <p class="field-note" data-i18n="ct.form.oneof">Indique al menos un medio de contacto.</p>
           <label class="field"><span data-i18n="ct.form.topic">Tema *</span>
@@ -872,7 +886,7 @@ h2 .soft{color:var(--faint)}
               <option data-i18n="ct.form.t12">Otro</option>
             </select>
           </label>
-          <label class="field"><span data-i18n="ct.form.msg">El caso *</span><textarea id="cfMsg" rows="4" maxlength="300"></textarea><i class="ccount"><b id="cfCount">0</b>/300</i></label>
+          <label class="field"><span data-i18n="ct.form.msg">El caso *</span><textarea id="cfMsg" rows="3" maxlength="300"></textarea><i class="ccount"><b id="cfCount">0</b>/300</i></label>
           <input type="text" id="cfWebsite" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true" />
           <div id="cfCaptcha" class="cf-captcha"></div>
           <p class="cf-status" id="cfStatus" role="status" aria-live="polite"></p>
@@ -1177,7 +1191,7 @@ h2 .soft{color:var(--faint)}
   if (FORM_ENDPOINT && TURNSTILE_SITEKEY) {
     var tsWidget = null;
     window.igniTurnstileReady = function(){
-      tsWidget = window.turnstile.render(cfCaptcha, { sitekey: TURNSTILE_SITEKEY, theme: "auto" });
+      tsWidget = window.turnstile.render(cfCaptcha, { sitekey: TURNSTILE_SITEKEY, theme: "auto", retry: "auto", "refresh-expired": "auto" });
     };
     var ts = document.createElement("script");
     ts.src = "https://challenges.cloudflare.com/turnstile/v0/api.js?onload=igniTurnstileReady&render=explicit";
