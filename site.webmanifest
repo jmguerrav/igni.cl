@@ -1,0 +1,12 @@
+{
+  "name": "Igni — Ingeniería de procesos para agua y gas",
+  "short_name": "Igni",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#ffffff",
+  "theme_color": "#2f6fd6",
+  "icons": [
+    { "src": "/favicon-32.png", "sizes": "32x32", "type": "image/png" },
+    { "src": "/apple-touch-icon.png", "sizes": "180x180", "type": "image/png" }
+  ]
+}
