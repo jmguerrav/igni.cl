@@ -10,4 +10,4 @@ jobs:
       - name: sitio
         run: curl -fsS --max-time 30 https://igni.cl > /dev/null
       - name: receptor del formulario
-        run: curl -fsS --max-time 30 -o /dev/null -X OPTIONS https://igni-form.ignicl.workers.dev -H "Origin: https://igni.cl"
+        run: 'curl -fsS --max-time 30 -o /dev/null -X OPTIONS https://igni-form.ignicl.workers.dev -H "Origin: https://igni.cl"'
