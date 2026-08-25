@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
+Disallow: /accounts/
 
 Sitemap: https://igni.cl/sitemap.xml

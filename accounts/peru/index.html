@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="robots" content="noindex, nofollow" />
+<meta name="referrer" content="no-referrer" />
+<title>Igni · Proceso comercial y contable — Perú</title>
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f1115" />
+<style>
+:root{
+  --bg:#ffffff; --ink:#0f1115; --muted:#5a6472; --line:#e6e9ee;
+  --accent:#2F6FD6; --card:#f6f8fb; --warn-bg:#fff7e8; --warn-line:#e8c680;
+}
+@media (prefers-color-scheme: dark){
+  :root{ --bg:#0f1115; --ink:#eef1f6; --muted:#9aa4b2; --line:#242a33;
+    --accent:#6ea3ff; --card:#161a21; --warn-bg:#241d0e; --warn-line:#6b5628; }
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.65 "Helvetica Neue",Inter,-apple-system,system-ui,sans-serif;}
+main{max-width:820px;margin:0 auto;padding:48px 24px 96px}
+.kicker{color:var(--accent);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600}
+h1{font-size:30px;line-height:1.25;margin:8px 0 4px}
+.sub{color:var(--muted);margin:0 0 36px}
+h2{font-size:20px;margin:44px 0 12px;padding-top:20px;border-top:1px solid var(--line)}
+h3{font-size:16px;margin:20px 0 6px}
+p{margin:10px 0}
+ul,ol{margin:10px 0;padding-left:22px}
+li{margin:6px 0}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px 20px;margin:16px 0}
+.warn{background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:10px;padding:14px 18px;margin:16px 0}
+.tag{display:inline-block;font-size:12px;font-weight:600;color:var(--accent);
+  border:1px solid var(--accent);border-radius:99px;padding:1px 10px;margin-right:8px;vertical-align:2px}
+table{width:100%;border-collapse:collapse;margin:14px 0;font-size:15px}
+th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--muted);font-weight:600;font-size:13px;text-transform:uppercase;letter-spacing:.06em}
+.muted{color:var(--muted)}
+footer{margin-top:56px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:16px}
+</style>
+</head>
+<body>
+<main>
+<p class="kicker">Igni · Interno</p>
+<h1>Proceso comercial y contable — clientes en Perú</h1>
+<p class="sub">Cómo factura y cobra Igni (Chile) a una empresa peruana por servicios de ingeniería prestados en forma remota. Referencia operativa · agosto 2026.</p>
+
+<h2>1. Vehículo y moneda</h2>
+<ul>
+  <li>Se factura desde <strong>Igni SpA (Chile)</strong> mediante <strong>factura de exportación de servicios</strong>.</li>
+  <li>Cotización, contrato y factura siempre en <strong>USD</strong> — nunca en PEN.</li>
+  <li>Modalidad: <strong>paquete cerrado por entregable</strong> (precio y alcance definidos por adelantado), no horas abiertas.</li>
+</ul>
+
+<h2>2. Lado Chile</h2>
+<ul>
+  <li><span class="tag">IVA</span> La exportación de servicios a un no residente que los utiliza fuera de Chile está <strong>exenta de IVA</strong>. Posición exacta del giro: confirmar con el contador antes de la primera factura.</li>
+  <li><span class="tag">Renta</span> Tributación normal en Chile (régimen Pro-Pyme al inicio).</li>
+  <li><span class="tag">Cobro</span> Transferencia <strong>SWIFT en USD</strong> a la cuenta de la SpA, o riel tipo <strong>Wise / Global66</strong>.</li>
+</ul>
+
+<h2>3. Lado Perú — los dos impuestos que tocan la operación</h2>
+
+<h3>IGV 18% — «utilización de servicios»</h3>
+<p>Lo <strong>autoliquida el cliente peruano</strong> y lo usa como crédito fiscal. No es costo de Igni ni del cliente; solo hay que avisar a su contabilidad del régimen aplicable para que no lo descubran tarde.</p>
+
+<h3>Retención de renta a no domiciliados</h3>
+<div class="card">
+  <p>Un servicio de ingeniería usado económicamente en Perú puede clasificar como <strong>«asistencia técnica» → retención del 15%</strong> sobre la factura, aunque se preste 100% remoto desde Chile.</p>
+  <p><strong>La defensa es el CDI Chile–Perú</strong> (vigente desde 2004): como empresa chilena <em>sin establecimiento permanente</em> en Perú, los beneficios empresariales tributan solo en Chile (art. 7).</p>
+  <p>Para que el cliente <strong>no retenga</strong>, hay que entregarle el <strong>Certificado de Residencia Fiscal</strong> emitido por el SII (trámite online, gratuito, se renueva por período). Sin ese papel, su contador retiene el 15% por defecto.</p>
+</div>
+
+<h2>4. Papeles por operación</h2>
+<table>
+  <tr><th>Documento</th><th>Para qué</th></tr>
+  <tr><td><strong>Contrato de locación de servicios</strong> (2–3 páginas)</td>
+      <td>Alcance por entregable, precio en USD, cláusula «servicios prestados íntegramente desde Chile», y que cualquier retención peruana se documenta o el precio es neto de retenciones.</td></tr>
+  <tr><td><strong>Factura de exportación</strong> (USD)</td>
+      <td>Emitida por la SpA. El cliente la necesita junto al contrato para deducir el gasto ante SUNAT — el papeleo formal también le sirve a él.</td></tr>
+  <tr><td><strong>Certificado de Residencia Fiscal (SII)</strong></td>
+      <td>Se adjunta a la factura para aplicar el CDI y evitar la retención del 15%.</td></tr>
+  <tr><td><strong>Constancia de transferencia</strong></td>
+      <td>Respaldo del pago SWIFT en USD para conciliación.</td></tr>
+</table>
+
+<h2>5. Secuencia tipo</h2>
+<ol>
+  <li>Propuesta por paquete cerrado en USD → aceptación por escrito.</li>
+  <li>Firma del contrato de locación de servicios.</li>
+  <li>Entrega del certificado de residencia SII al cliente (antes de la primera factura).</li>
+  <li>Ejecución y entrega del paquete.</li>
+  <li>Factura de exportación en USD.</li>
+  <li>Pago por transferencia al exterior en USD (trámite rutinario para empresas que ya compran a proveedores extranjeros).</li>
+</ol>
+
+<div class="warn">
+  <strong>Pendientes con el contador (no dar por cerrado):</strong>
+  <ul>
+    <li>Calificación exacta de la exención de IVA exportación para el giro de la SpA.</li>
+    <li>Mecánica y vigencia del certificado de residencia frente a SUNAT (¿por operación o por período?).</li>
+    <li>Estado previo: la SpA debe estar constituida e iniciada en el SII antes de poder facturar (gate del roadmap).</li>
+  </ul>
+</div>
+
+<footer>Igni · documento de referencia interna — no constituye asesoría tributaria. Fuente de trabajo: análisis ago-2026; verificar cada punto marcado con el contador.</footer>
+</main>
+</body>
+</html>
