@@ -680,6 +680,11 @@ ul.tick li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:
 .sld-n{flex:none;font-size:13px;color:var(--soft);font-variant-numeric:tabular-nums}
 .sld-n b{color:var(--ink)}
 @media print{.dets{display:block;transform:none !important}.dets > .det{margin-bottom:12pt}.sldc{display:none}}
+
+/* la franja se centra; en pantallas angostas vuelve a alinearse a la izquierda
+   para que el desplazamiento lateral no deje ítems inalcanzables */
+.subnav-in{justify-content:center;justify-content:safe center}
+@media (max-width:900px){.subnav-in{justify-content:flex-start}}
 </style>
 </head>
 <body>
