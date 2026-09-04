@@ -1,13 +1,30 @@
 name: uptime
+
 on:
   schedule:
     - cron: "*/30 * * * *"
   workflow_dispatch:
+
+# Un 503 pasajero de GitHub Pages o de Cloudflare no es una caída: sin reintentos,
+# cualquier parpadeo de dos segundos mandaba un correo de alarma. Cada paso
+# reintenta cuatro veces con diez segundos de espera y sólo falla si el sitio
+# sigue sin responder. Además del código 200 se comprueba que el HTML sea el
+# nuestro, para que una página en blanco o un error del proxy también cuenten.
+env:
+  CURL_OPTS: "-fsS --max-time 25 --retry 4 --retry-delay 10 --retry-all-errors -A igni-uptime/1.0"
+
 jobs:
   check:
     runs-on: ubuntu-latest
     steps:
-      - name: sitio
-        run: curl -fsS --max-time 30 https://igni.cl > /dev/null
+      - name: portada
+        run: |
+          curl $CURL_OPTS https://igni.cl | grep -q 'canonical" href="https://igni.cl/"'
+
+      - name: brochure
+        run: |
+          curl $CURL_OPTS https://igni.cl/brochure/ | grep -q 'canonical" href="https://igni.cl/brochure/"'
+
       - name: receptor del formulario
-        run: 'curl -fsS --max-time 30 -o /dev/null -X OPTIONS https://igni-form.ignicl.workers.dev -H "Origin: https://igni.cl"'
+        run: |
+          curl $CURL_OPTS -o /dev/null -X OPTIONS https://igni-form.ignicl.workers.dev -H "Origin: https://igni.cl"
