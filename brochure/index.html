@@ -686,28 +686,32 @@ ul.tick li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:
 .subnav-in{justify-content:center;justify-content:safe center}
 @media (max-width:900px){.subnav-in{justify-content:flex-start}}
 
-/* método en círculo: los seis pasos alrededor, el texto al lado */
-.ciclo{display:grid;grid-template-columns:300px 1fr;gap:44px;align-items:center;margin-top:48px}
-.ciclo-anillo{position:relative;width:300px;height:300px;border-radius:50%;border:2px dashed var(--line);
-  display:grid;place-items:center}
-.ciclo-n{position:absolute;top:50%;left:50%;width:52px;height:52px;margin:-26px;border-radius:50%;
-  border:1px solid var(--line);background:var(--bg);color:var(--soft);font:700 17px/1 var(--sans);cursor:pointer;
-  transform:rotate(var(--a)) translate(150px) rotate(calc(-1 * var(--a)));
-  transition:background .2s var(--ease),color .2s var(--ease),border-color .2s var(--ease),box-shadow .2s var(--ease)}
+/* método: rueda centrada que avanza sola */
+.centrada .eyebrow{justify-content:center}
+.centrada h2,.centrada .lead,.centrada .closing{text-align:center;margin-left:auto;margin-right:auto}
+.centrada .lead{max-width:62ch}
+.ciclo{display:flex;flex-direction:column;align-items:center;gap:34px;margin-top:52px}
+.ciclo-anillo{position:relative;width:340px;height:340px;display:grid;place-items:center}
+.ciclo-arco{position:absolute;inset:34px;border-radius:50%;border:1px dashed var(--line)}
+.ciclo-n{position:absolute;top:50%;left:50%;width:54px;height:54px;margin:-27px;border-radius:50%;
+  border:1px solid var(--line);background:var(--bg);color:var(--soft);font:600 17px/1 var(--sans);cursor:pointer;
+  transform:rotate(var(--a)) translate(136px) rotate(calc(-1 * var(--a)));
+  transition:background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease),box-shadow .3s var(--ease),scale .3s var(--ease)}
 .ciclo-n:hover{border-color:var(--acc);color:var(--acc)}
-.ciclo-n.on{background:var(--acc);border-color:var(--acc);color:#fff;box-shadow:0 6px 18px rgba(47,111,214,.32)}
-.ciclo-c{text-align:center;max-width:150px}
-.ciclo-k{font-size:13px;color:var(--soft)} .ciclo-k b{color:var(--ink);font-size:15px}
-.ciclo-txt{position:relative;min-height:150px}
-.ciclo-p{display:none} .ciclo-p.on{display:block;animation:cfade .28s var(--ease)}
-.ciclo-p h3{font-size:22px;letter-spacing:-.02em;margin-bottom:10px}
-.ciclo-p p{font-size:16px;line-height:1.65;color:var(--soft);max-width:56ch}
-@keyframes cfade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-@media (max-width:820px){.ciclo{grid-template-columns:1fr;gap:28px;justify-items:center}
-  .ciclo-anillo{width:250px;height:250px}
-  .ciclo-n{width:44px;height:44px;margin:-22px;transform:rotate(var(--a)) translate(125px) rotate(calc(-1 * var(--a)));font-size:15px}
-  .ciclo-txt{text-align:center}.ciclo-p p{margin:0 auto}}
-@media print{.ciclo{grid-template-columns:1fr}.ciclo-anillo{display:none}.ciclo-p{display:block !important;margin-bottom:10pt}}
+.ciclo-n.on{background:var(--acc);border-color:var(--acc);color:#fff;scale:1.12;box-shadow:0 8px 22px rgba(47,111,214,.34)}
+.ciclo-c{display:grid;place-items:center;width:150px;height:150px;border-radius:50%;background:var(--alt);border:1px solid var(--line)}
+.ciclo-b{font-family:var(--sans);font-size:44px;font-weight:800;line-height:1;color:var(--acc);font-variant-numeric:tabular-nums}
+.ciclo-c span{font-size:13px;color:var(--soft);margin-top:4px}
+.ciclo-txt{position:relative;min-height:120px;width:100%;max-width:640px;text-align:center}
+.ciclo-p{display:none} .ciclo-p.on{display:block;animation:cfade .32s var(--ease)}
+.ciclo-p h3{font-size:23px;letter-spacing:-.02em;margin-bottom:10px}
+.ciclo-p p{font-size:16.5px;line-height:1.65;color:var(--soft)}
+@keyframes cfade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media (max-width:600px){.ciclo-anillo{width:280px;height:280px}
+  .ciclo-n{width:46px;height:46px;margin:-23px;font-size:15px;transform:rotate(var(--a)) translate(112px) rotate(calc(-1 * var(--a)))}
+  .ciclo-c{width:124px;height:124px}.ciclo-b{font-size:36px}}
+@media (prefers-reduced-motion:reduce){.ciclo-p.on{animation:none}}
+@media print{.ciclo-anillo{display:none}.ciclo-p{display:block !important;margin-bottom:10pt;text-align:left}}
 /* normas: una tarjeta por disciplina */
 .norms{grid-template-columns:repeat(2,1fr);gap:18px}
 .norm{position:relative;background:var(--bg);border:1px solid var(--line);border-radius:16px;padding:22px 22px 20px}
@@ -716,6 +720,14 @@ ul.tick li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:
   border:1px solid var(--tintln);border-radius:999px;padding:4px 9px}
 .norm .chip{background:var(--alt);border-color:var(--line);font-size:12.5px}
 @media (max-width:820px){.norms{grid-template-columns:1fr}}
+
+/* pie: ocupa las dos columnas de la rejilla de contacto, la línea acompaña al
+   contenido y el crédito se va a la derecha */
+.contact-grid > .foot{grid-column:1 / -1}
+.foot::before{left:0;width:100%}
+.foot > span:last-child{margin-left:auto;text-align:right}
+/* sección centrada: el subrayado del título también se centra */
+.centrada h2::after{margin-left:auto;margin-right:auto}
 </style>
 </head>
 <body>
@@ -1133,12 +1145,12 @@ ul.tick li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:
     <p class="quote reveal" data-i18n="bx356">Un número que no se puede rastrear hasta su fuente no es un resultado: es una opinión con decimales.</p>
   </div>
 </section>
-<section class="section alt" id="metodo">
+<section class="section alt centrada" id="metodo">
   <div class="wrap">
     <p class="eyebrow reveal" data-i18n="bx369">06 · Cómo trabajamos</p>
     <h2 class="reveal" data-i18n="bx370">Del primer correo a la entrega</h2>
     <p class="lead reveal" data-i18n="bx371">El mismo camino en todos los encargos, sea un cálculo de dos días o una ingeniería de tres meses.</p>
-    <div class="ciclo reveal"><div class="ciclo-anillo"><button class="ciclo-n on" type="button" data-i="0" style="--a:-90deg">1</button><button class="ciclo-n" type="button" data-i="1" style="--a:-30deg">2</button><button class="ciclo-n" type="button" data-i="2" style="--a:30deg">3</button><button class="ciclo-n" type="button" data-i="3" style="--a:90deg">4</button><button class="ciclo-n" type="button" data-i="4" style="--a:150deg">5</button><button class="ciclo-n" type="button" data-i="5" style="--a:210deg">6</button><div class="ciclo-c"><span class="ciclo-k">Paso <b>1</b> de 6</span></div></div><div class="ciclo-txt"><div class="ciclo-p on" data-i="0"><h3 data-i18n="bx357">Conversación de 30 minutos</h3><p data-i18n="bx358">Nos cuenta el caso. Escuchamos, preguntamos y decimos de entrada si es algo que hacemos bien.</p></div><div class="ciclo-p" data-i="1"><h3 data-i18n="bx359">Nota técnica de una página</h3><p data-i18n="bx360">Cómo lo abordaríamos, qué información haría falta y en qué plazo. Sin costo y sin compromiso.</p></div><div class="ciclo-p" data-i="2"><h3 data-i18n="bx361">Propuesta con alcance cerrado</h3><p data-i18n="bx362">Qué entra, qué no entra, qué entregables recibe, en qué formato y a qué precio. Antes de empezar.</p></div><div class="ciclo-p" data-i="3"><h3 data-i18n="bx363">Ejecución con hitos visibles</h3><p data-i18n="bx364">Avance revisable en cada hito, no una caja negra que se abre al final.</p></div><div class="ciclo-p" data-i="4"><h3 data-i18n="bx365">Entrega con memoria de respaldo</h3><p data-i18n="bx366">Cada número entregado se recalcula por un segundo camino independiente antes de salir de aquí.</p></div><div class="ciclo-p" data-i="5"><h3 data-i18n="bx367">Acompañamiento posterior</h3><p data-i18n="bx368">Quedamos disponibles para las preguntas del proveedor, del montaje y de la puesta en marcha.</p></div></div></div>
+    <div class="ciclo reveal" data-ciclo><div class="ciclo-anillo"><span class="ciclo-arco" aria-hidden="true"></span><button class="ciclo-n on" type="button" data-i="0" style="--a:-90deg" aria-label="Paso 1">1</button><button class="ciclo-n" type="button" data-i="1" style="--a:-30deg" aria-label="Paso 2">2</button><button class="ciclo-n" type="button" data-i="2" style="--a:30deg" aria-label="Paso 3">3</button><button class="ciclo-n" type="button" data-i="3" style="--a:90deg" aria-label="Paso 4">4</button><button class="ciclo-n" type="button" data-i="4" style="--a:150deg" aria-label="Paso 5">5</button><button class="ciclo-n" type="button" data-i="5" style="--a:210deg" aria-label="Paso 6">6</button><div class="ciclo-c"><b class="ciclo-b">1</b><span>de 6</span></div></div><div class="ciclo-txt"><div class="ciclo-p on" data-i="0"><h3 data-i18n="bx357">Conversación de 30 minutos</h3><p data-i18n="bx358">Nos cuenta el caso. Escuchamos, preguntamos y decimos de entrada si es algo que hacemos bien.</p></div><div class="ciclo-p" data-i="1"><h3 data-i18n="bx359">Nota técnica de una página</h3><p data-i18n="bx360">Cómo lo abordaríamos, qué información haría falta y en qué plazo. Sin costo y sin compromiso.</p></div><div class="ciclo-p" data-i="2"><h3 data-i18n="bx361">Propuesta con alcance cerrado</h3><p data-i18n="bx362">Qué entra, qué no entra, qué entregables recibe, en qué formato y a qué precio. Antes de empezar.</p></div><div class="ciclo-p" data-i="3"><h3 data-i18n="bx363">Ejecución con hitos visibles</h3><p data-i18n="bx364">Avance revisable en cada hito, no una caja negra que se abre al final.</p></div><div class="ciclo-p" data-i="4"><h3 data-i18n="bx365">Entrega con memoria de respaldo</h3><p data-i18n="bx366">Cada número entregado se recalcula por un segundo camino independiente antes de salir de aquí.</p></div><div class="ciclo-p" data-i="5"><h3 data-i18n="bx367">Acompañamiento posterior</h3><p data-i18n="bx368">Quedamos disponibles para las preguntas del proveedor, del montaje y de la puesta en marcha.</p></div></div></div>
     <p class="closing reveal" data-i18n="bx372">Si en cualquiera de estos pasos el trabajo deja de tener sentido para usted, se detiene ahí. No hay permanencia mínima.</p>
   </div>
 </section>
@@ -1750,21 +1762,34 @@ ul.tick li::before{content:"";position:absolute;left:0;top:8px;width:6px;height:
     if (abreLamina(a.getAttribute("href").slice(1))) e.preventDefault();
   });
   if (location.hash) setTimeout(function(){ abreLamina(location.hash.slice(1)); }, 60);
-
-  /* ── método circular ── */
-  document.querySelectorAll(".ciclo").forEach(function(c){
+})();
+</script>
+<script>
+(function(){
+  "use strict";
+  document.querySelectorAll("[data-ciclo]").forEach(function(c){
     var nodos = [].slice.call(c.querySelectorAll(".ciclo-n"));
     var textos = [].slice.call(c.querySelectorAll(".ciclo-p"));
-    var cuenta = c.querySelector(".ciclo-k b");
-    function ver(i){
-      nodos.forEach(function(n, k){ n.classList.toggle("on", k === i); });
+    var cuenta = c.querySelector(".ciclo-b");
+    var i = 0, reloj = null;
+    var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function ver(n){
+      i = (n + nodos.length) % nodos.length;
+      nodos.forEach(function(x, k){ x.classList.toggle("on", k === i); });
       textos.forEach(function(t, k){ t.classList.toggle("on", k === i); });
       if (cuenta) cuenta.textContent = i + 1;
     }
+    function anda(){ if (quieto || reloj) return; reloj = setInterval(function(){ ver(i + 1); }, 1000); }
+    function para(){ clearInterval(reloj); reloj = null; }
     nodos.forEach(function(n){
-      n.addEventListener("click", function(){ ver(+n.dataset.i); });
-      n.addEventListener("mouseenter", function(){ ver(+n.dataset.i); });
+      n.addEventListener("click", function(){ para(); ver(+n.dataset.i); });
+      n.addEventListener("mouseenter", function(){ para(); ver(+n.dataset.i); });
     });
+    c.addEventListener("mouseenter", para);
+    c.addEventListener("mouseleave", anda);
+    if ("IntersectionObserver" in window) {
+      new IntersectionObserver(function(e){ e[0].isIntersecting ? anda() : para(); }, {threshold:.25}).observe(c);
+    } else { anda(); }
   });
 })();
 </script>
