@@ -9,6 +9,7 @@
 <meta name="description" content="Igni es una consultora de ingeniería de procesos especializada en agua y gas (GLP/GNL): diseño, revisión, eficiencia y seguridad de procesos, por proyecto." />
 <link rel="canonical" href="https://igni.cl/" />
 <link rel="alternate" hreflang="es" href="https://igni.cl/" />
+<link rel="alternate" hreflang="en" href="https://igni.cl/en/" />
 <link rel="alternate" hreflang="x-default" href="https://igni.cl/" />
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f1115" />
@@ -87,8 +88,9 @@ img{max-width:100%}
 .globe{width:15px;height:15px;flex:none}
 .lang-menu{position:absolute;top:calc(100% + 10px);right:0;min-width:150px;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:6px;display:none;flex-direction:column;box-shadow:0 12px 28px var(--shadow);z-index:110}
 .lang-menu.open{display:flex}
-.lang-menu button{text-align:left;border:none;background:none;font:inherit;font-size:13.5px;color:var(--soft);padding:8px 12px;border-radius:9px;cursor:pointer}
-.lang-menu button:hover{background:var(--alt);color:var(--ink)}
+.lang-menu .lang-link{text-decoration:none;display:block}
+.lang-menu button,.lang-menu .lang-link{text-align:left;border:none;background:none;font:inherit;font-size:13.5px;color:var(--soft);padding:8px 12px;border-radius:9px;cursor:pointer}
+.lang-menu button:hover,.lang-menu .lang-link:hover{background:var(--alt);color:var(--ink)}
 .lang-menu button.active{color:var(--acc);font-weight:500}
 
 /* type */
@@ -790,7 +792,7 @@ h1,h2,h3,h4,.h1,.stat b,.tm-t b{font-weight:400}
         </button>
         <div class="lang-menu" id="langMenu" role="menu">
           <button data-lang="es" class="active" role="menuitem">Español</button>
-          <button data-lang="en" role="menuitem">English</button>
+          <a href="/en/" role="menuitem" class="lang-link">English</a>
         </div>
       </div>
       <a href="#contacto" class="nav-cta" data-i18n="nav.cta">Contacto</a>
