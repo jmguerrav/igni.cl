@@ -5,10 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Página no encontrada — Igni</title>
 <meta name="robots" content="noindex" />
+<script>try{var t=localStorage.getItem("igni-wg-theme");if(t==="dark"||t==="light")document.documentElement.setAttribute("data-theme",t);}catch(e){}</script>
 <style>
 @font-face{font-family:"Geist";src:url("/fonts/geist.woff2") format("woff2");font-weight:100 900;font-display:swap}
 :root{--bg:#ffffff;--ink:#0d0d0d;--soft:rgba(13,13,13,.62);--acc:#2f6fd6}
-@media (prefers-color-scheme: dark){:root{--bg:#0f1115;--ink:#f2f3f5;--soft:rgba(242,243,245,.65);--acc:#3d7ae0}}
+:root[data-theme="dark"]{--bg:#0f1115;--ink:#f2f3f5;--soft:rgba(242,243,245,.65);--acc:#3d7ae0}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#0f1115;--ink:#f2f3f5;--soft:rgba(242,243,245,.65);--acc:#3d7ae0}}
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--ink);font-family:"Geist","Inter",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;min-height:100dvh;display:grid;place-items:center;padding:24px;text-align:center}
 .mark404{width:74px;height:auto;color:var(--acc);margin-bottom:26px}
@@ -22,11 +24,26 @@ a.plain:hover{color:var(--ink)}
 <body>
 <svg style="display:none" aria-hidden="true"><symbol id="i-shine" viewBox="0 0 14 14"><rect x="6" y="0" width="1" height="1"/><rect x="7" y="0" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="7" y="1" width="1" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="7" y="2" width="1" height="1"/><rect x="5" y="3" width="1" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="7" y="3" width="1" height="1"/><rect x="8" y="3" width="1" height="1"/><rect x="4" y="4" width="1" height="1"/><rect x="5" y="4" width="1" height="1"/><rect x="8" y="4" width="1" height="1"/><rect x="9" y="4" width="1" height="1"/><rect x="3" y="5" width="1" height="1"/><rect x="4" y="5" width="1" height="1"/><rect x="9" y="5" width="1" height="1"/><rect x="10" y="5" width="1" height="1"/><rect x="0" y="6" width="1" height="1"/><rect x="1" y="6" width="1" height="1"/><rect x="2" y="6" width="1" height="1"/><rect x="3" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/><rect x="11" y="6" width="1" height="1"/><rect x="12" y="6" width="1" height="1"/><rect x="13" y="6" width="1" height="1"/><rect x="0" y="7" width="1" height="1"/><rect x="1" y="7" width="1" height="1"/><rect x="2" y="7" width="1" height="1"/><rect x="3" y="7" width="1" height="1"/><rect x="10" y="7" width="1" height="1"/><rect x="11" y="7" width="1" height="1"/><rect x="12" y="7" width="1" height="1"/><rect x="13" y="7" width="1" height="1"/><rect x="3" y="8" width="1" height="1"/><rect x="4" y="8" width="1" height="1"/><rect x="9" y="8" width="1" height="1"/><rect x="10" y="8" width="1" height="1"/><rect x="4" y="9" width="1" height="1"/><rect x="5" y="9" width="1" height="1"/><rect x="8" y="9" width="1" height="1"/><rect x="9" y="9" width="1" height="1"/><rect x="5" y="10" width="1" height="1"/><rect x="6" y="10" width="1" height="1"/><rect x="7" y="10" width="1" height="1"/><rect x="8" y="10" width="1" height="1"/><rect x="6" y="11" width="1" height="1"/><rect x="7" y="11" width="1" height="1"/><rect x="6" y="12" width="1" height="1"/><rect x="7" y="12" width="1" height="1"/><rect x="6" y="13" width="1" height="1"/><rect x="7" y="13" width="1" height="1"/></symbol></svg>
 <main>
-<svg class="mark404"><use href="#i-shine"/></svg>
-<h1>Esta página no existe</h1>
-<p>La dirección que buscas no está en igni.cl — quizá el enlace cambió o se escribió con un error.</p>
-<a class="btn" href="/">Volver al inicio</a>
-<a class="plain" href="/#contacto">o escríbenos directamente</a>
+<svg class="mark404" aria-hidden="true"><use href="#i-shine"/></svg>
+<h1 data-i18n="h1">Esta página no existe</h1>
+<p data-i18n="p">La dirección solicitada no existe en igni.cl; es posible que el enlace haya cambiado o contenga un error.</p>
+<a class="btn" href="/" data-i18n="btn">Volver al inicio</a>
+<a class="plain" href="/#contacto" data-i18n="plain">o escríbanos directamente</a>
 </main>
+<script>
+(function(){
+  var lang = null;
+  try { lang = localStorage.getItem("igni-wg-lang"); } catch (e) {}
+  if (/[?&]lang=en\b/.test(location.search)) lang = "en";
+  if (lang !== "en") return;
+  var EN = { h1: "This page does not exist",
+             p: "The requested address does not exist on igni.cl; the link may have changed or contain an error.",
+             btn: "Back to home", plain: "or write to us directly" };
+  document.documentElement.lang = "en";
+  document.title = "Page not found \u2014 Igni";
+  var els = document.querySelectorAll("[data-i18n]");
+  for (var i = 0; i < els.length; i++) { var k = els[i].getAttribute("data-i18n"); if (EN[k]) els[i].textContent = EN[k]; }
+})();
+</script>
 </body>
 </html>
