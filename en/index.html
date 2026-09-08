@@ -50,7 +50,10 @@ setTimeout(function(){
 </script>
 <style>
 @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url("/fonts/inter.woff2") format("woff2")}@font-face{font-family:"Geist";font-style:normal;font-weight:100 900;font-display:swap;src:url("/fonts/geist.woff2") format("woff2")}
-/* Igni · agua y gas — blanco, negro y UN azul (2F6FD6, el del lockup). Inter. Autocontenido para Google Sites. */
+/* Igni · agua y gas — blanco, negro y UN azul (2F6FD6, el del lockup).
+   Todo en un archivo: el sitio se sirve estático desde GitHub Pages y no hay
+   build de CSS. (Nació autocontenido para incrustarse en Google Sites; desde
+   el 09-sep-2026 vive sólo en su propio dominio.) */
 :root{
   --bg:#ffffff; --ink:#0d0d0d;
   --soft:rgba(13,13,13,.68); --faint:rgba(13,13,13,.60);
@@ -71,7 +74,7 @@ img{max-width:100%}
 ::selection{background:rgba(47,111,214,.2)}
 .wrap{max-width:var(--maxw);margin:0 auto;padding:0 24px}
 
-/* nav — sticky so it also works inside a Google Sites iframe */
+/* nav — pegajosa: el menú acompaña al lector en páginas largas como el brochure */
 .nav{position:sticky;top:0;z-index:100;height:var(--navh);background:var(--navbg);border-bottom:1px solid var(--line)}
 .nav-inner{max-width:1180px;margin:0 auto;height:100%;padding:0 22px;display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{display:inline-flex;align-items:center;gap:10px;color:var(--ink)}
@@ -1270,7 +1273,9 @@ h1,h2,h3,h4,.h1,.stat b,.tm-t b{font-weight:400}
   for (var b = 0; b < lbs.length; b++) lbs[b].addEventListener("click", function(){ setLang(this.getAttribute("data-lang")); lm.classList.remove("open"); });
   document.addEventListener("click", function(){ lm.classList.remove("open"); lt.setAttribute("aria-expanded","false"); });
 
-  /* contact → mailto, built as a real link so it works inside a sandboxed iframe (Google Sites) */
+  /* El botón de enviar es un <a href="mailto:"> que el JS intercepta: si el
+     script falla o está bloqueado, el enlace sigue abriendo el correo en vez de
+     dejar un botón muerto (misma mejora progresiva que el reveal). */
   var cfName=document.getElementById("cfName"), cfCompany=document.getElementById("cfCompany"),
       cfEmail=document.getElementById("cfEmail"), cfPhone=document.getElementById("cfPhone"), cfCC=document.getElementById("cfCC"),
       cfTopic=document.getElementById("cfTopic"), cfMsg=document.getElementById("cfMsg"),
