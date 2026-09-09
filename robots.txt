@@ -1,4 +1,11 @@
-User-agent: *
-Allow: /
+# Cloudflare inyecta delante de este archivo su bloque gestionado, que declara
+# search=yes / ai-train=no y bloquea a los rastreadores de ENTRENAMIENTO (GPTBot,
+# ClaudeBot, CCBot, Google-Extended…). Los de búsqueda en vivo — Googlebot, Bingbot,
+# OAI-SearchBot, PerplexityBot — quedan libres y pueden citar el sitio: es la postura
+# que Jose eligió el 09-sep-2026. Ese bloque ya trae su propio «User-agent: *», así
+# que aquí NO se repite: dos grupos iguales son un robots.txt malformado.
+# Queda sólo el sitemap, que es una directiva independiente del grupo y que el
+# bloque gestionado no declara. Si algún día se apaga en Cloudflare, este archivo
+# sigue siendo válido por sí solo (sin reglas = todo permitido).
 
 Sitemap: https://igni.cl/sitemap.xml
