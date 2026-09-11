@@ -563,6 +563,18 @@ h2 .soft{color:var(--faint)}
   transition:background .18s var(--ease)}
 .ok-again:hover{background:rgba(255,255,255,.14)}
 @media (prefers-reduced-motion: reduce){.cform-inner{transition:none}}
+/* una sola cara en reposo (11-sep-2026). La captura «Página completa» de iOS, como
+   todo PDF de WebKit, ignora backface-visibility y pinta el dorso girado EN ESPEJO
+   encima del formulario: así lo vio un visitante, con las etiquetas vacías y sin haber
+   enviado nada (reproducido con el PDF de WebKit). Por eso la cara inactiva se oculta
+   con visibility: el dorso aparece al empezar el giro y se oculta al terminar el de
+   vuelta; al acabar el de ida se oculta el frente y la tarjeta queda plana. */
+.cform-inner .back{visibility:hidden;transition:visibility 0s linear 1.05s}
+.cform-inner.sent .back{visibility:visible;transition-delay:0s}
+.cform-inner.sent.done{transition:none;transform:none}
+.cform-inner.done .front{visibility:hidden}
+.cform-inner.done .back{transform:none}
+@media (prefers-reduced-motion: reduce){.cform-inner .back{transition:none}}
 
 .field-note{font-size:12.5px;color:var(--faint);margin:-6px 0 14px}
 .field.bad input,.field.bad select,.field.bad textarea{border-color:#b3261e;box-shadow:0 0 0 3px rgba(179,38,30,.12)}
@@ -1682,11 +1694,28 @@ h1,h2,h3,h4,.h1,.stat b,.tm-t b{font-weight:400}
     pon("okEmail", cfEmail.value.trim()); pon("okPhone", telCompleto());
     pon("okTopic", cfTopic.options[cfTopic.selectedIndex].textContent);
     var m=document.getElementById("okMsg"); if(m) m.textContent = cfMsg.value.trim();
-    if (cformInner) cformInner.classList.add("sent");
+    if (cformInner) {
+      cformInner.classList.add("sent");
+      /* ver «una sola cara en reposo» en el CSS; con un temporizador y no transitionend porque
+         con movimiento reducido no hay transición y el evento nunca llega */
+      clearTimeout(cformInner._plana);
+      cformInner._plana = setTimeout(function(){
+        if (cformInner.classList.contains("sent")) cformInner.classList.add("done"); }, 1250);
+    }
   }
   var okAgain = document.getElementById("okAgain");
   if (okAgain) okAgain.addEventListener("click", function(){
-    if (cformInner) cformInner.classList.remove("sent");
+    if (cformInner) {
+      clearTimeout(cformInner._plana);
+      if (cformInner.classList.contains("done")) {
+        /* se vuelve al giro 3D sin animar, y desde ahí se voltea de regreso */
+        cformInner.style.transition = "none";
+        cformInner.classList.remove("done");
+        void cformInner.offsetWidth;
+        cformInner.style.transition = "";
+      }
+      cformInner.classList.remove("sent");
+    }
     [cfName,cfCompany,cfEmail,cfPhone,cfMsg].forEach(function(el){ el.value=""; marca(el,false); });
     say(""); updateMail();
   });
