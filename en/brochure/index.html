@@ -112,7 +112,7 @@ h2 .soft{color:var(--faint)}
 .section{padding:var(--secpad) 0;border-top:1px solid var(--line)}
 /* Un salto de ancla debe dejar el EPÍGRAFE bajo la barra, no el borde superior
    de la sección: los --secpad de relleno son espacio vacío y empujaban el título
-   medio viewport abajo (Jose, 07-sep-2026). scroll-padding-top ya baja el
+   medio viewport abajo (decidido el 07-sep-2026). scroll-padding-top ya baja el
    destino (--navh + 16px); esto le resta el relleno y deja 48px de aire. */
 .section[id]{scroll-margin-top:calc(32px - var(--secpad))}
 .section.tint{background:var(--tint)}
@@ -873,7 +873,7 @@ h1,h2,h3,h4,.h1,.stat b,.tm-t b{font-weight:400}
    un filete que lo separa de lo anterior, sin llegar a ser sección */
 /* El ancla usa la misma cuenta que .section[id]: scroll-padding-top ya baja el
    destino, así que aquí se le resta el relleno propio (38px) para que el
-   epígrafe quede a la misma altura que el de una sección (Jose, 07-sep-2026). */
+   epígrafe quede a la misma altura que el de una sección (decidido el 07-sep-2026). */
 .anidada{margin-top:64px;padding-top:38px;border-top:1px solid var(--line);
   scroll-margin-top:calc(32px - 38px)}
 .sub-h{margin:14px 0 0;font-size:clamp(20px,2.1vw,25px);letter-spacing:-.02em}
@@ -1606,7 +1606,7 @@ h1,h2,h3,h4,.h1,.stat b,.tm-t b{font-weight:400}
 
   /* El botón Contacto baja al final del documento, no al borde superior de la
      sección: el formulario y el pie forman un bloque y quedaba el pie fuera de
-     vista (Jose, 07-sep-2026). */
+     vista (decidido el 07-sep-2026). */
   function alFinal(suave){
     var quieto = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: document.documentElement.scrollHeight,
